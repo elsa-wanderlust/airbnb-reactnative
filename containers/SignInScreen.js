@@ -1,14 +1,20 @@
 import { useNavigation } from "@react-navigation/core"; // to navigate
 import {
-  Button,
   Text,
   TextInput,
   View,
   TouchableOpacity,
+  TouchableHighlight,
   Alert,
+  ScrollView,
 } from "react-native";
+import styles from "../styles/general"; // import styling
 import { useState } from "react"; // to declare state
 import axios from "axios"; // to be able to send request
+import { FontAwesome } from "@expo/vector-icons"; // for icons
+
+// IMPORT COMPONENTS
+import LogoAirBnB from "../components/LogoAirBnB";
 
 export default function SignInScreen({ setToken }) {
   // DECLARE VARIABLES FOR IMPORTS
@@ -18,7 +24,7 @@ export default function SignInScreen({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [alert, setAlert] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   // DECLARE FUNCTION TO CREATE ALERT IF LOGIN SUCESSFULL
   const loginAlert = () =>
@@ -52,41 +58,56 @@ export default function SignInScreen({ setToken }) {
   };
 
   return (
-    <View>
-      <View>
-        <Text>{password}</Text>
-        <TextInput
-          placeholder="email"
-          onChangeText={(text) => {
-            setEmail(text.toLowerCase());
-          }}
-          value={email}
-        />
-        <TextInput
-          placeholder="password"
-          secureTextEntry={true}
-          onChangeText={(text) => {
-            setPassword(text.toLowerCase());
-          }}
-          value={password}
-        />
-        <Button
-          title="Sign in"
-          onPress={async () => {
-            // const userToken = "secret-token";
-            // setToken(userToken);
-            handleSubmit();
-          }}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("SignUp");
-          }}
-        >
-          <Text>No Account? Register</Text>
-        </TouchableOpacity>
-        {errorMessage ? <Text>{errorMessage}</Text> : ""}
-      </View>
+    <View style={styles.pageContainer}>
+      <ScrollView>
+        {/* ------ LOGO AND PAGE NAME ------*/}
+        <View style={styles.logoTitle}>
+          <LogoAirBnB />
+          <Text style={styles.title}>Sign In </Text>
+        </View>
+        {/* ------ FORM ------*/}
+        <View style={styles.allFields}>
+          <TextInput
+            style={styles.eachField}
+            placeholder="email"
+            onChangeText={(text) => {
+              setEmail(text.toLowerCase());
+            }}
+            value={email}
+          />
+          <TextInput
+            style={styles.eachField}
+            placeholder="password"
+            secureTextEntry={true}
+            onChangeText={(text) => {
+              setPassword(text);
+            }}
+            value={password}
+          />
+        </View>
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : ""}
+        {/* ------ FORM VALIDATION ------*/}
+        <View style={[styles.flexCenterHor]}>
+          <TouchableHighlight
+            style={[styles.buttonSignInUp, styles.flexAllCenter]}
+            onPress={async () => {
+              // const userToken = "secret-token";
+              // setToken(userToken);
+              handleSubmit();
+            }}
+          >
+            <Text>Sign in</Text>
+          </TouchableHighlight>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("SignUp");
+            }}
+          >
+            <Text>No Account? Register</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
