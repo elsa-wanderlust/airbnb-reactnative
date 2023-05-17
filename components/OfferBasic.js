@@ -4,7 +4,6 @@ import stylesOfferBasic from "../styles/styleOfferBasic";
 
 // IMPORT FUNCTION
 import ReviewStar from "../utils/reviewsStar";
-import styles from "../styles/general";
 
 const OfferBasic = ({ item, navigation }) => {
   const { _id, title, price, ratingValue, reviews, photos, user } = item;

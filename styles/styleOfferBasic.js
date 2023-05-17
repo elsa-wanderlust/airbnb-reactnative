@@ -33,6 +33,7 @@ const stylesOfferBasic = StyleSheet.create({
     bottom: 10,
     paddingHorizontal: 30,
     paddingVertical: 10,
+    fontSize: 18,
   },
   // ------- OFFER INFO------
   offerInfo: {
