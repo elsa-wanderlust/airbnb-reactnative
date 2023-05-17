@@ -6,12 +6,12 @@ import logo from "../assets/logo.png";
 // IMPORT STYLE
 import stylesLogo from "../styles/logo";
 
-const LogoAirBnB = () => {
+const SmallLogoAirBnB = () => {
   return (
-    <View style={stylesLogo.logoBlock}>
-      <Image source={logo} style={stylesLogo.logo} />
+    <View style={stylesLogo.smallLogoBlock}>
+      <Image source={logo} style={stylesLogo.smallLogo} />
     </View>
   );
 };
 
-export default LogoAirBnB;
+export default SmallLogoAirBnB;

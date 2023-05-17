@@ -2,27 +2,28 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
-  flexCenterHor: {
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 25,
-    // backgroundColor: "red",
-  },
-  flexAllCenter: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   pageContainer: {
     flex: 1,
     width: "100%",
     backgroundColor: "white",
     paddingHorizontal: 15,
     paddingBottom: 30,
-    paddingTop: Constants.statusBarHeight,
-    // alignItems: "center",
-    // justifyContent: "space-around",
+    paddingTop: Constants.statusBarHeight + 10,
+  },
+  contentContainer: {
+    alignItems: "center",
+  },
+  flexCenterHor: {
+    alignItems: "center",
+  },
+  flexAllCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 25,
+    // backgroundColor: "red",
   },
 
   // SIGN IN / SIGN UP

@@ -12,6 +12,7 @@ import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import SplashScreen from "./containers/SplashScreen";
+import DetailsOfferScreen from "./containers/DetailsOfferScreen";
 
 // DECLARE VARIABLES FOR IMPORTS
 const Tab = createBottomTabNavigator();
@@ -74,7 +75,6 @@ export default function App() {
         ) : (
           // User is signed in ! 🎉
           <Stack.Screen name="Tab" options={{ headerShown: false }}>
-            {/* {console.log("yurray! token")} */}
             {() => (
               // --------TAB NAVIGATOR --------
               <Tab.Navigator
@@ -105,6 +105,17 @@ export default function App() {
                         }}
                       >
                         {() => <HomeScreen />}
+                      </Stack.Screen>
+                      <Stack.Screen
+                        name="offerDetails"
+                        options={{
+                          headerShown: false,
+                          // title: "oneOffer",
+                          // headerStyle: { backgroundColor: "red" },
+                          // headerTitleStyle: { color: "white" },
+                        }}
+                      >
+                        {() => <DetailsOfferScreen />}
                       </Stack.Screen>
 
                       <Stack.Screen

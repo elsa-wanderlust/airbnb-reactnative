@@ -1,11 +1,19 @@
-import { View, Text, Image, Button } from "react-native";
-// import "../styles/styleOfferBasic";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+// IMPORT STYLES
 import stylesOfferBasic from "../styles/styleOfferBasic";
 
+// IMPORT FUNCTION
+import ReviewStar from "../utils/reviewsStar";
+import styles from "../styles/general";
+
 const OfferBasic = ({ item, navigation }) => {
-  const { title, price, ratingValue, reviews, photos, user } = item;
+  const { _id, title, price, ratingValue, reviews, photos, user } = item;
   return (
-    <View style={stylesOfferBasic.anOffer}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("offerDetails", { offerId: _id })}
+      style={stylesOfferBasic.anOffer}
+    >
+      {/* ------- IMAGE and PRICE------ */}
       <View style={stylesOfferBasic.offerPictureBlock}>
         <Image
           source={{
@@ -15,22 +23,25 @@ const OfferBasic = ({ item, navigation }) => {
         />
         <Text style={stylesOfferBasic.offerPrice}>{price} €</Text>
       </View>
-      <Text style={stylesOfferBasic.title}>{title}</Text>
-      <Text>{ratingValue}</Text>
-      <Text>{reviews}</Text>
-      <Image
-        source={{
-          uri: user.account.photo.url,
-        }}
-        style={stylesOfferBasic.avatar}
-      />
-      <Button
-        title="Press here"
-        onPress={() => {
-          console.log("pressed !");
-        }}
-      />
-    </View>
+      {/* ------- OFFER INFO ------ */}
+      <View style={stylesOfferBasic.offerInfo}>
+        <View style={stylesOfferBasic.offerDetails}>
+          <Text style={stylesOfferBasic.offerTitle} numberOfLines={1}>
+            {title}
+          </Text>
+          <View style={stylesOfferBasic.ratingSystem}>
+            <ReviewStar ratingValue={ratingValue} />
+            <Text style={stylesOfferBasic.review}>{reviews} reviews</Text>
+          </View>
+        </View>
+        <Image
+          source={{
+            uri: user.account.photo.url,
+          }}
+          style={stylesOfferBasic.avatar}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 export default OfferBasic;

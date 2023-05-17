@@ -3,9 +3,12 @@ import { Button, Text, View, ScrollView, FlatList } from "react-native";
 import axios from "axios"; // to be able to send request
 import { useState, useEffect } from "react"; // to declare states
 import OfferBasic from "../components/OfferBasic";
+// IMPORT STYLES
+import stylesOfferBasic from "../styles/styleOfferBasic";
 import styles from "../styles/general";
 
-// IMPORT COMPONENT(S)
+// IMPORT COMPONENTS
+import SmallLogoAirBnB from "../components/SmallLogoAirBnB";
 
 export default function HomeScreen() {
   // DECLARE STATES
@@ -15,7 +18,7 @@ export default function HomeScreen() {
   // DECLARE VARIABLES FROM IMPORT
   const navigation = useNavigation();
 
-  // DECLARE USE EFFECT
+  // USE EFFECT
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -33,21 +36,22 @@ export default function HomeScreen() {
   // console.log(data);
 
   return (
-    <View style={styles.pageContainer}>
-      <Text>Welcome home! this is where the logo should go instead</Text>
+    <View style={stylesOfferBasic.allOffersPage}>
+      <SmallLogoAirBnB />
       <FlatList
         data={data}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return <OfferBasic item={item} navigation={navigation} />;
         }}
+        style={stylesOfferBasic.allOffers}
       />
-      <Button
+      {/* <Button
         title="Go to Profile"
         onPress={() => {
           navigation.navigate("Profile", { userId: 123 });
         }}
-      />
+      /> */}
     </View>
   );
 }
