@@ -28,9 +28,9 @@ export default function SignUpScreen({ setToken }) {
     { name: "description", input: "", error: false },
     { name: "password", input: "", error: false },
     { name: "confirm password", input: "", error: false },
-  ]);
+  ]); // the error bollean is only linked to the style of the field
   const [pwVisible, setPwVisible] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // error display message
 
   // DECLARE FUNCTION TO CREATE ALERT IF LOGIN SUCESSFULL
   const loginAlert = () =>
@@ -40,9 +40,8 @@ export default function SignUpScreen({ setToken }) {
 
   // DECLARE FUNCTION TO HANDLE SUBMIT
   const handleSubmit = async () => {
-    // will only do the axios request IF error number === 0, which mistake no user mis-entry
-    let errorNumber = 0;
-    setErrorMessage("");
+    let errorNumber = 0; // count how many issues are they, if 0, it goes to the next "check"
+    setErrorMessage(""); // reset error message to null when re-submitting
     for (let i = 0; i < fields.length; i++) {
       // reset the error to false for all fields
       fieldsCopy = [...fields];
@@ -55,14 +54,17 @@ export default function SignUpScreen({ setToken }) {
         setFields(fieldsCopy);
         setErrorMessage("all fields must be filled");
         errorNumber++;
-        // or if the password are not identical + update error message
-      } else if (fields[3].input !== fields[4].input) {
-        fieldsCopy = [...fields];
-        fieldsCopy[3].error = true;
-        fieldsCopy[4].error = true;
-        setFields(fieldsCopy);
-        setErrorMessage("the passwords must be identical");
-        errorNumber++;
+      }
+      // if all fields are filled, checks if passwords are identical
+      if (errorNumber === 0) {
+        if (fields[3].input !== fields[4].input) {
+          fieldsCopy = [...fields];
+          fieldsCopy[3].error = true;
+          fieldsCopy[4].error = true;
+          setFields(fieldsCopy);
+          setErrorMessage("the passwords must be identical");
+          errorNumber++;
+        }
       }
     }
     if (errorNumber === 0) {
