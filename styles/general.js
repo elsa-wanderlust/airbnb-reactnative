@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   flexCenterHor: {
@@ -18,7 +19,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     paddingHorizontal: 15,
-    paddingVertical: 30,
+    paddingBottom: 30,
+    paddingTop: Constants.statusBarHeight,
     // alignItems: "center",
     // justifyContent: "space-around",
   },
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderBottomColor: "#FFBAC0",
     borderBottomWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   boxField: {
     borderColor: "#F9585D",

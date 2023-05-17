@@ -11,7 +11,6 @@ import {
 import styles from "../styles/general"; // import styling
 import { useState } from "react"; // to declare state
 import axios from "axios"; // to be able to send request
-import { FontAwesome } from "@expo/vector-icons"; // for icons
 
 // IMPORT COMPONENTS
 import LogoAirBnB from "../components/LogoAirBnB";
@@ -27,10 +26,14 @@ export default function SignInScreen({ setToken }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // DECLARE FUNCTION TO CREATE ALERT IF LOGIN SUCESSFULL
-  const loginAlert = () =>
-    Alert.alert("Login", "you've successfully logged in", [
-      { text: "OK", onPress: () => setToken(data.token) },
+  // once the alert 'OKed' it calls the function setToken that saves in in the state
+  const loginAlert = (token) => {
+    // console.log(token);
+    return Alert.alert("Login", "you've successfully logged in", [
+      // { text: `OK` },
+      { text: `OK`, onPress: () => setToken(token) },
     ]);
+  };
 
   // DECLARE FUNCTION TO HANDLE SUBMIT
   const handleSubmit = async () => {
@@ -44,7 +47,8 @@ export default function SignInScreen({ setToken }) {
           { email, password }
         );
         setData(response.data);
-        loginAlert();
+        // console.log(response.data);
+        loginAlert(response.data.token);
       } catch (error) {
         if (error.response.status === 401) {
           setErrorMessage("your password and/or email are not correct");

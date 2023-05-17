@@ -32,7 +32,8 @@ export default function App() {
 
     setUserToken(token);
   };
-
+  // console.log(userToken);
+  // EVERY TIME WE OPEN
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
@@ -61,18 +62,21 @@ export default function App() {
           // No token found, user isn't signed in
           <>
             {/* --------- SCREEN : SIGN IN  ---------*/}
-            <Stack.Screen name="SignIn">
+            <Stack.Screen name="SignIn" options={{ headerShown: false }}>
               {() => <SignInScreen setToken={setToken} />}
             </Stack.Screen>
             {/* --------- SCREEN : SIGN UP ---------*/}
-            <Stack.Screen name="SignUp">
+            <Stack.Screen name="SignUp" options={{ headerShown: false }}>
               {() => <SignUpScreen setToken={setToken} />}
             </Stack.Screen>
+            {console.log("no token")}
           </>
         ) : (
           // User is signed in ! 🎉
           <Stack.Screen name="Tab" options={{ headerShown: false }}>
+            {/* {console.log("yurray! token")} */}
             {() => (
+              // --------TAB NAVIGATOR --------
               <Tab.Navigator
                 screenOptions={{
                   headerShown: false,
@@ -80,7 +84,6 @@ export default function App() {
                   tabBarInactiveTintColor: "gray",
                 }}
               >
-                {/* -------- TAB NAVIGATOR ----------*/}
                 <Tab.Screen
                   name="TabHome"
                   options={{
@@ -95,6 +98,7 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={{
+                          headerShown: false,
                           title: "My App",
                           headerStyle: { backgroundColor: "red" },
                           headerTitleStyle: { color: "white" },

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   Button,
   Text,
@@ -7,11 +8,11 @@ import {
   TouchableOpacity,
   Alert,
   TouchableHighlight,
-  ScrollView,
 } from "react-native";
 import styles from "../styles/general"; // import styling
 import { useState } from "react"; // to declare state
 import axios from "axios"; // to be able to send request
+import { Feather } from "@expo/vector-icons"; // import icons
 
 // IMPORT COMPONENTS
 import LogoAirBnB from "../components/LogoAirBnB";
@@ -34,6 +35,7 @@ export default function SignUpScreen({ setToken }) {
     { name: "password", input: "", message: "" },
     { name: "confirm password", input: "", message: "" },
   ]);
+  const [pwVisible, setPwVisible] = useState(false);
 
   // DECLARE FUNCTION TO CREATE ALERT IF LOGIN SUCESSFULL
   const loginAlert = () =>
@@ -92,66 +94,71 @@ export default function SignUpScreen({ setToken }) {
     }
   };
 
+  // DECLARE FUNCTION TO VIEW PASSWORD
+  const viewPassword = () => {
+    setPwVisible(!pwVisible);
+  };
+
   return (
-    <View style={styles.pageContainer}>
-      <ScrollView>
-        {/* ------ LOGO AND PAGE NAME ------*/}
-        <View style={styles.logoTitle}>
-          <LogoAirBnB />
-          <Text style={styles.title}>Sign Up </Text>
-        </View>
-        {/* ------ FORM ------*/}
-        <View style={styles.allFields}>
+    <KeyboardAwareScrollView style={styles.pageContainer}>
+      {/* ------ LOGO AND PAGE NAME ------*/}
+      <View style={styles.logoTitle}>
+        <LogoAirBnB />
+        <Text style={styles.title}>Sign Up </Text>
+      </View>
+      {/* ------ FORM ------*/}
+      <View style={styles.allFields}>
+        <TextInput
+          style={styles.eachField}
+          placeholder="email"
+          onChangeText={(text) => {
+            fieldsCopy = [...fields];
+            fieldsCopy[0].input = text.toLowerCase();
+            setFields(fieldsCopy);
+          }}
+          value={fields[0].input}
+        />
+        {fields[0].message ? (
+          <Text style={styles.error}>{fields[0].message}</Text>
+        ) : (
+          ""
+        )}
+        <TextInput
+          style={styles.eachField}
+          placeholder="username"
+          onChangeText={(text) => {
+            fieldsCopy = [...fields];
+            fieldsCopy[1].input = text;
+            setFields(fieldsCopy);
+          }}
+          value={fields[1].input}
+        />
+        {fields[1].message ? (
+          <Text style={styles.error}>{fields[1].message}</Text>
+        ) : (
+          ""
+        )}
+        <TextInput
+          style={[styles.eachField, styles.boxField]}
+          multiline
+          placeholder="describe yourself in a few words"
+          onChangeText={(text) => {
+            fieldsCopy = [...fields];
+            fieldsCopy[2].input = text;
+            setFields(fieldsCopy);
+          }}
+          value={fields[2].input}
+        />
+        {fields[2].message ? (
+          <Text style={styles.error}>{fields[2].message}</Text>
+        ) : (
+          ""
+        )}
+        <View style={styles.eachField}>
           <TextInput
-            style={styles.eachField}
-            placeholder="email"
-            onChangeText={(text) => {
-              fieldsCopy = [...fields];
-              fieldsCopy[0].input = text.toLowerCase();
-              setFields(fieldsCopy);
-            }}
-            value={fields[0].input}
-          />
-          {fields[0].message ? (
-            <Text style={styles.error}>{fields[0].message}</Text>
-          ) : (
-            ""
-          )}
-          {/* <Text>error email </Text> */}
-          <TextInput
-            style={styles.eachField}
-            placeholder="username"
-            onChangeText={(text) => {
-              fieldsCopy = [...fields];
-              fieldsCopy[1].input = text;
-              setFields(fieldsCopy);
-            }}
-            value={fields[1].input}
-          />
-          {fields[1].message ? (
-            <Text style={styles.error}>{fields[1].message}</Text>
-          ) : (
-            ""
-          )}
-          <TextInput
-            style={[styles.eachField, styles.boxField]}
-            placeholder="describe yourself in a few words"
-            onChangeText={(text) => {
-              fieldsCopy = [...fields];
-              fieldsCopy[2].input = text;
-              setFields(fieldsCopy);
-            }}
-            value={fields[2].input}
-          />
-          {fields[2].message ? (
-            <Text style={styles.error}>{fields[2].message}</Text>
-          ) : (
-            ""
-          )}
-          <TextInput
-            style={styles.eachField}
             placeholder="password"
-            secureTextEntry={true}
+            // {pwVisible} ? secureTextEntry={false} : secureTextEntry={true}}
+            secureTextEntry={pwVisible ? false : true}
             onChangeText={(text) => {
               fieldsCopy = [...fields];
               fieldsCopy[3].input = text;
@@ -159,15 +166,31 @@ export default function SignUpScreen({ setToken }) {
             }}
             value={fields[3].input}
           />
-          {fields[3].message ? (
-            <Text style={styles.error}>{fields[3].message}</Text>
+          {pwVisible ? (
+            <Feather
+              name="eye"
+              size={24}
+              color="black"
+              onPress={viewPassword}
+            />
           ) : (
-            ""
+            <Feather
+              name="eye-off"
+              size={24}
+              color="black"
+              onPress={viewPassword}
+            />
           )}
+        </View>
+        {fields[3].message ? (
+          <Text style={styles.error}>{fields[3].message}</Text>
+        ) : (
+          ""
+        )}
+        <View style={styles.eachField}>
           <TextInput
-            style={styles.eachField}
             placeholder="confirm password"
-            secureTextEntry={true}
+            secureTextEntry={pwVisible ? false : true}
             onChangeText={(text) => {
               fieldsCopy = [...fields];
               fieldsCopy[4].input = text;
@@ -175,32 +198,47 @@ export default function SignUpScreen({ setToken }) {
             }}
             value={fields[4].input}
           />
-          {fields[4].message ? (
-            <Text style={styles.error}>{fields[4].message}</Text>
+          {pwVisible ? (
+            <Feather
+              name="eye"
+              size={24}
+              color="black"
+              onPress={viewPassword}
+            />
           ) : (
-            ""
+            <Feather
+              name="eye-off"
+              size={24}
+              color="black"
+              onPress={viewPassword}
+            />
           )}
-          <View style={[styles.flexCenterHor]}>
-            <TouchableHighlight
-              style={[styles.buttonSignInUp, styles.flexAllCenter]}
-              onPress={async () => {
-                // const userToken = "secret-token";
-                // setToken(userToken);
-                handleSubmit();
-              }}
-            >
-              <Text>Sign up</Text>
-            </TouchableHighlight>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("SignIn");
-              }}
-            >
-              <Text>Already have an account? Sign in</Text>
-            </TouchableOpacity>
-          </View>
         </View>
-      </ScrollView>
-    </View>
+        {fields[4].message ? (
+          <Text style={styles.error}>{fields[4].message}</Text>
+        ) : (
+          ""
+        )}
+        <View style={[styles.flexCenterHor]}>
+          <TouchableHighlight
+            style={[styles.buttonSignInUp, styles.flexAllCenter]}
+            onPress={async () => {
+              // const userToken = "secret-token";
+              // setToken(userToken);
+              handleSubmit();
+            }}
+          >
+            <Text>Sign up</Text>
+          </TouchableHighlight>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("SignIn");
+            }}
+          >
+            <Text>Already have an account? Sign in</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
