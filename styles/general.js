@@ -43,6 +43,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  eachFieldError: {
+    height: 50,
+    marginBottom: 10,
+    borderColor: "red",
+    borderWidth: 3,
+    paddingHorizontal: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   boxField: {
     borderColor: "#F9585D",
     borderWidth: 1,
@@ -54,13 +64,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: "#F9585D",
     borderWidth: 3,
-    marginTop: 40,
+    marginTop: 25,
     marginBottom: 20,
   },
-  error: {
+  errorMessage: {
+    textAlign: "center",
     color: "red",
     fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 15,
   },
 });
 
