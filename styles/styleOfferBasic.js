@@ -26,13 +26,17 @@ const stylesOfferBasic = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  offerPrice: {
+  offerPriceBlock: {
     backgroundColor: "black",
-    color: "white",
+    width: 110,
+    height: 40,
     position: "absolute",
     bottom: 10,
-    paddingHorizontal: 30,
-    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  offerPrice: {
+    color: "white",
     fontSize: 18,
   },
   // ------- OFFER INFO------
@@ -53,9 +57,9 @@ const stylesOfferBasic = StyleSheet.create({
   ratingSystem: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
   },
   review: {
+    marginLeft: 10,
     color: "#D8D8D8",
   },
   avatar: {

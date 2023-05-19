@@ -8,6 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
+import MapView, { Marker } from "react-native-maps";
 import { Octicons } from "@expo/vector-icons";
 // IMPORT STYLES
 import styles from "../styles/general";
@@ -30,16 +31,13 @@ const DetailedOffer = () => {
 
   //   USE EFFECT
   useEffect(() => {
-    // console.log("im here1");
     const fetchOfferDetails = async () => {
       try {
-        // console.log("im here2");
         const response = await axios.get(
           `https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms/${route.params.offerId}`
         );
         setData(response.data);
         setIsLoading(false);
-        // console.log(response.data);
       } catch (error) {
         console.log(error.message);
       }
@@ -56,7 +54,8 @@ const DetailedOffer = () => {
     title,
     user,
   } = data;
-  console.log("user details", user);
+  // console.log("user details", user);
+  console.log(location);
   return (
     <View style={stylesOfferBasic.allOffersPage}>
       {isLoading ? (
@@ -67,7 +66,7 @@ const DetailedOffer = () => {
         />
       ) : (
         <>
-          <SmallLogoAirBnB />
+          {/* <SmallLogoAirBnB /> */}
           {/* ----- PICTURE and PRICE --------*/}
           <View style={stylesDetailsOffer.offerPictureBlock}>
             <Image
@@ -125,9 +124,21 @@ const DetailedOffer = () => {
             </TouchableHighlight>
           </View>
           {/* ----- MAP --------*/}
-          <View style={stylesDetailsOffer.map}>
-            <Text>map</Text>
-          </View>
+          <MapView
+            style={stylesDetailsOffer.map}
+            initialRegion={{
+              latitude: location[1],
+              longitude: location[0],
+              // latitude: 48.856614,
+              // longitude: 2.3522219,
+              latitudeDelta: 0.5,
+              longitudeDelta: 0.5,
+            }}
+          >
+            <Marker
+              coordinate={{ latitude: location[1], longitude: location[0] }}
+            />
+          </MapView>
         </>
       )}
     </View>

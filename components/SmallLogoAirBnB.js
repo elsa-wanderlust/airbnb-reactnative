@@ -1,4 +1,4 @@
-import { Image, View, StyleSheet } from "react-native";
+import { Image, View, Text } from "react-native";
 
 // IMPORT IMAGE
 import logo from "../assets/logo.png";
@@ -7,11 +7,7 @@ import logo from "../assets/logo.png";
 import stylesLogo from "../styles/logo";
 
 const SmallLogoAirBnB = () => {
-  return (
-    <View style={stylesLogo.smallLogoBlock}>
-      <Image source={logo} style={stylesLogo.smallLogo} />
-    </View>
-  );
+  return <Image source={logo} style={stylesLogo.smallLogo} />;
 };
 
 export default SmallLogoAirBnB;

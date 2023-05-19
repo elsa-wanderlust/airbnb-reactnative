@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const stylesDetailsOffer = StyleSheet.create({
   // ------ PICTURE--------
   offerPictureBlock: {
-    height: "40%",
+    height: "35%",
     width: "100%",
     position: "relative",
   },

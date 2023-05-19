@@ -20,7 +20,9 @@ const OfferBasic = ({ item, navigation }) => {
           }}
           style={stylesOfferBasic.offerPicture}
         />
-        <Text style={stylesOfferBasic.offerPrice}>{price} €</Text>
+        <View style={stylesOfferBasic.offerPriceBlock}>
+          <Text style={stylesOfferBasic.offerPrice}>{price} €</Text>
+        </View>
       </View>
       {/* ------- OFFER INFO ------ */}
       <View style={stylesOfferBasic.offerInfo}>

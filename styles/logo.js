@@ -21,8 +21,8 @@ const stylesLogo = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 10,
     // marginBottom: 10,
-    borderBottomColor: "grey",
-    borderBottomWidth: 0.5,
+    // borderBottomColor: "grey",
+    // borderBottomWidth: 0.5,
   },
   smallLogo: {
     height: 30,

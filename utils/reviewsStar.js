@@ -5,16 +5,19 @@ const ReviewStar = ({ ratingValue }) => {
   const reviewTab = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= ratingValue) {
-      reviewTab.push(<Ionicons name="star-sharp" size={24} color="#FFB100" />);
+      reviewTab.push(
+        <Ionicons name="star-sharp" size={24} color="#FFB100" key={i} />
+      );
     } else {
-      reviewTab.push(<Ionicons name="star-sharp" size={24} color="#E0DBCE" />);
+      reviewTab.push(
+        <Ionicons name="star-sharp" size={24} color="#E0DBCE" key={i} />
+      );
     }
   }
-  return (
-    <View>
-      <Text>{reviewTab}</Text>
-    </View>
-  );
+  return reviewTab;
+  // <View>
+  //   <Text>{reviewTab}</Text>
+  // </View>
 };
 
 export default ReviewStar;

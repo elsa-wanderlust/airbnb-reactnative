@@ -7,7 +7,7 @@ import OfferBasic from "../components/OfferBasic";
 import stylesOfferBasic from "../styles/styleOfferBasic";
 
 // IMPORT COMPONENTS
-import SmallLogoAirBnB from "../components/SmallLogoAirBnB";
+// import SmallLogoAirBnB from "../components/SmallLogoAirBnB";
 
 export default function HomeScreen() {
   // DECLARE STATES
@@ -46,7 +46,7 @@ export default function HomeScreen() {
         </>
       ) : (
         <>
-          <SmallLogoAirBnB />
+          {/* <SmallLogoAirBnB /> */}
           <FlatList
             data={data}
             keyExtractor={(item) => item._id}

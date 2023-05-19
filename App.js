@@ -4,8 +4,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack"; // transition between screens
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"; // simple tab bar on the bottom of the screen that lets you switch between different routes
 import { Ionicons } from "@expo/vector-icons";
+import { Image } from "react-native";
+
+// IMPORT IMAGE
+import logo from "./assets/logo.png";
+
+// IMPORT COMPONENTS
+import SmallLogoAirBnB from "./components/SmallLogoAirBnB";
 
 // IMPORT SCREENS
+import AroundMeScreen from "./containers/AroundMeScreen";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
@@ -98,10 +106,7 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={{
-                          headerShown: false,
-                          title: "My App",
-                          headerStyle: { backgroundColor: "red" },
-                          headerTitleStyle: { color: "white" },
+                          headerTitle: () => <SmallLogoAirBnB />,
                         }}
                       >
                         {() => <HomeScreen />}
@@ -109,10 +114,7 @@ export default function App() {
                       <Stack.Screen
                         name="offerDetails"
                         options={{
-                          headerShown: false,
-                          // title: "oneOffer",
-                          // headerStyle: { backgroundColor: "red" },
-                          // headerTitleStyle: { color: "white" },
+                          headerTitle: () => <SmallLogoAirBnB />,
                         }}
                       >
                         {() => <DetailsOfferScreen />}
@@ -125,6 +127,36 @@ export default function App() {
                         }}
                       >
                         {() => <ProfileScreen />}
+                      </Stack.Screen>
+                    </Stack.Navigator>
+                  )}
+                </Tab.Screen>
+                <Tab.Screen
+                  name="TabaroundMe"
+                  options={{
+                    tabBarLabel: "Around me",
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons
+                        name={"location-outline"}
+                        size={size}
+                        color={color}
+                      />
+                    ),
+                  }}
+                >
+                  {() => (
+                    <Stack.Navigator>
+                      <Stack.Screen
+                        name="aroundMe"
+                        component={AroundMeScreen}
+                      />
+                      <Stack.Screen
+                        name="offerDetailsMap"
+                        options={{
+                          headerTitle: () => <SmallLogoAirBnB />,
+                        }}
+                      >
+                        {() => <DetailsOfferScreen />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
